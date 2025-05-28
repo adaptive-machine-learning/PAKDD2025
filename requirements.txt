@@ -1,0 +1,3 @@
+capymoa
+torch
+torchvision
