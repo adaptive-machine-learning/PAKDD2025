@@ -1,8 +1,10 @@
-from typing import List, Tuple
+from typing import Dict, Optional, Tuple
 
+import pandas as pd
 from capymoa.ocl.evaluation import OCLMetrics
 from matplotlib import pyplot as plt
 from matplotlib.axes import Axes
+from matplotlib.figure import Figure, SubFigure
 
 plt.rcParams["font.family"] = "sans-serif"
 plt.rcParams["font.sans-serif"] = ["Noto Sans"]
@@ -12,15 +14,33 @@ figsize_169 = (455 * pt, 256 * pt)
 figsize = (figsize_169[0], 0.45 * figsize_169[0])
 
 
+def table(metrics: Dict[str, OCLMetrics]) -> pd.DataFrame:
+    rows = []
+    for name, m in metrics.items():
+        rows.append(
+            {
+                "name": name,
+                "Final Accuracy": m.accuracy_final * 100,
+                "Average Accuracy": m.accuracy_seen_avg * 100,
+                "Online Accuracy": m.ttt.cumulative.accuracy(),
+                "CPU Time (s)": m.ttt.cpu_time(),
+            }
+        )
+    return pd.DataFrame(rows).round(1)
+
+
 def plot_multiple(
-    metrics: List[Tuple[str, OCLMetrics]],
-    ax: Axes,
+    metrics: Dict[str, OCLMetrics],
+    ax: Optional[Axes] = None,
     acc_online: bool = False,
     acc_all: bool = False,
     acc_seen: bool = False,
-):
+) -> Tuple[Optional[Figure | SubFigure], Axes]:
+    if ax is None:
+        _, ax = plt.subplots(figsize=figsize)
+
     cmap = plt.get_cmap("tab10")
-    for i, (name, m) in enumerate(metrics):
+    for i, (name, m) in enumerate(metrics.items()):
         color = cmap(i)
         if acc_all:
             ax.plot(
@@ -43,7 +63,7 @@ def plot_multiple(
                 m.anytime_accuracy_seen * 100,
                 "-",
                 color=color,
-                label=f"{name} (seen)",
+                label=f"{name}",
             )
             ax.scatter(
                 m.task_index,
@@ -81,7 +101,9 @@ def plot_multiple(
     )
     ax.set_ylabel("Accuracy")
     ax.set_xlabel("Task")
-    ax.set_xlim(0, len(m.task_index) * 1.1)
+    ax.set_xlim(0, len(next(iter(metrics.values())).task_index) * 1.1)
+
+    return ax.get_figure(), ax
 
 
 def ocl_plot(
