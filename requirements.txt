@@ -1,3 +1,4 @@
 capymoa
 torch
 torchvision
+kornia
