@@ -10,5 +10,11 @@ run: fmt
 	python -m jupyter nbconvert --to notebook --execute --inplace 01_replay.ipynb
 
 
-02_prototype.html: 02_prototype.ipynb
-	python -m jupyter nbconvert --to html --execute 02_prototype.ipynb
+html/%.html: %.ipynb
+	python -m jupyter nbconvert --to html --output-dir=html --execute $<
+
+all: \
+	html/00_evaluation.html \
+	html/01_replay.html \
+	html/02_regularization.html \
+	html/03_prototype.html
