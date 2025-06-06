@@ -1,20 +1,20 @@
 
+
+notebooks = $(shell find notebooks -name "*.ipynb")
+
 .PHONY: fmt
 fmt:
 	ruff format
 	ruff check --fix --extend-select I
-	python -m jupyter nbconvert --clear-output --inplace $(shell find . -name "*.ipynb")
+	python -m jupyter nbconvert --clear-output --inplace $(notebooks)
 
-.PHONY: run
-run: fmt
-	python -m jupyter nbconvert --to notebook --execute --inplace 01_replay.ipynb
+.PHONY: clear
+clear:
+	python -m jupyter nbconvert --clear-output --inplace $(notebooks)
+
+# Render all notebooks
+.PHONY: render
+render: fmt clear
+	python -m jupyter nbconvert --to notebook --execute --inplace $(notebooks)
 
 
-html/%.html: %.ipynb
-	python -m jupyter nbconvert --to html --output-dir=html --execute $<
-
-all: \
-	html/00_evaluation.html \
-	html/01_replay.html \
-	html/02_regularization.html \
-	html/03_prototype.html
