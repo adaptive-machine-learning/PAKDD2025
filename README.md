@@ -12,9 +12,38 @@ The session includes hands-on demonstrations using CapyMOA, an open-source platf
 
 ## Setup
 
-To get setup follow [these instructions](https://capymoa.org/installation.html) to get setup with CapyMOA.
-It is recommended you install PyTorch with GPU support since we use neural networks in this tutorial. 
+It is recommended (but not necessary) for you install PyTorch with GPU support since we use neural networks in this tutorial. 
 
+### Local Setup
+
+1. Setup a Python environment (e.g., using `venv` or `conda`):
+    ```bash
+    python -m venv .venv-ocl
+    source .venv-ocl/bin/activate  # On Windows use `ocl_env\Scripts\activate`
+    ```
+2. Install [CapyMOA](https://capymoa.org/installation.html).
+3. Install the tutorial requirements:
+   ```bash
+   pip install -r requirements.txt
+   ```
+4. Open the Jupyter Notebook server:
+   ```bash
+   jupyter notebook
+   ```
+
+### Docker Setup
+
+Alternatively, you can get started using docker (only CPU is supported in docker at the moment):
+```bash
+docker run \
+    -p 8888:8888 \
+    -v $(pwd):/home/jovyan/work \
+    tachyonic/jupyter-capymoa
+```
+Once the container is running, you can access the Jupyter Notebook server at `http://localhost:8888` in your web browser. Inside the notebook pip install the requirements:
+```bash
+pip install -r requirements.txt
+```
 
 ## Tutorial Outline
 
