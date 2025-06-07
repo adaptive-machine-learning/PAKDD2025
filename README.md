@@ -24,7 +24,7 @@ It is recommended (but not necessary) for you install PyTorch with GPU support s
 2. Install [CapyMOA](https://capymoa.org/installation.html).
 3. Install the tutorial requirements:
    ```bash
-   pip install -r requirements.txt
+   pip install -r notebooks/requirements.txt
    ```
 4. Open the Jupyter Notebook server:
    ```bash
@@ -37,7 +37,8 @@ Alternatively, you can get started using docker (only CPU is supported in docker
 ```bash
 docker run \
     -p 8888:8888 \
-    -v $(pwd):/home/jovyan/work \
+    -v ./data:/home/jovyan/data \
+    -v ./notebooks:/home/jovyan/work \
     tachyonic/jupyter-capymoa
 ```
 Once the container is running, you can access the Jupyter Notebook server at `http://localhost:8888` in your web browser. Inside the notebook pip install the requirements:
