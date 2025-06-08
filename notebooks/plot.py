@@ -37,7 +37,7 @@ def plot_multiple(
     acc_seen: bool = False,
 ) -> Tuple[Optional[Figure | SubFigure], Axes]:
     if ax is None:
-        _, ax = plt.subplots(figsize=figsize)
+        _, ax = plt.subplots(figsize=figsize, layout="constrained")
 
     cmap = plt.get_cmap("tab10")
     for i, (name, m) in enumerate(metrics.items()):
@@ -108,12 +108,14 @@ def plot_multiple(
 
 def ocl_plot(
     m: OCLMetrics,
-    ax: Axes,
+    ax: Optional[Axes] = None,
     task_acc: bool = True,
     online_acc: bool = False,
     acc_all: bool = False,
     acc_seen: bool = False,
-):
+) -> Tuple[Optional[Figure | SubFigure], Axes]:
+    if ax is None:
+        _, ax = plt.subplots(figsize=figsize, layout="constrained")
     n_tasks = len(m.accuracy_matrix)
     cmap = plt.get_cmap("tab10")
 
@@ -168,3 +170,5 @@ def ocl_plot(
     )
     ax.set_ylabel("Accuracy")
     ax.set_xlabel("Task")
+
+    return ax.get_figure(), ax
