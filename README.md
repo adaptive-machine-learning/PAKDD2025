@@ -12,7 +12,11 @@ The session includes hands-on demonstrations using CapyMOA, an open-source platf
 
 ## Setup
 
-It is recommended (but not necessary) for you install PyTorch with GPU support since we use neural networks in this tutorial. 
+It is recommended (but not necessary) for you install PyTorch with GPU support since we use neural networks in this tutorial.
+
+```bash
+git clone https://github.com/adaptive-machine-learning/PAKDD2025
+```
 
 ### Local Setup
 
@@ -37,8 +41,8 @@ Alternatively, you can get started using docker (only CPU is supported in docker
 ```bash
 docker run \
     -p 8888:8888 \
-    -v ./data:/home/jovyan/data \
     -v ./notebooks:/home/jovyan/work \
+    -e CAPYMOA_DATASETS_DIR=/home/jovyan/work/data \
     tachyonic/jupyter-capymoa
 ```
 Once the container is running, you can access the Jupyter Notebook server at `http://localhost:8888` in your web browser. Inside the notebook pip install the requirements:

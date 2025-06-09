@@ -6,8 +6,8 @@ from matplotlib import pyplot as plt
 from matplotlib.axes import Axes
 from matplotlib.figure import Figure, SubFigure
 
-plt.rcParams["font.family"] = "sans-serif"
-plt.rcParams["font.sans-serif"] = ["Noto Sans"]
+# plt.rcParams["font.family"] = "sans-serif"
+# plt.rcParams["font.sans-serif"] = ["Noto Sans"]
 plt.rcParams["font.size"] = 9
 pt = 1 / 72.27
 figsize_169 = (455 * pt, 256 * pt)
