@@ -58,13 +58,13 @@ The tutorial is structured as follows:
 5. OCL Strategies
 
     1. Replay: [`notebooks/01_replay.ipynb`](notebooks/01_replay.ipynb)
-    2. Regularization: [`notebooks/02_regularization.ipynb`](notebooks/02_regularization.ipynb)
+    2. Regularisation: [`notebooks/02_regularization.ipynb`](notebooks/02_regularisation.ipynb)
     3. Prototype-based Methods: [`notebooks/03_prototype.ipynb`](notebooks/03_prototype.ipynb)
     4. Other Methods 
 
 6. Conclusion
 
-Slides can be found here: [`slides_PAKDD2025.pdf`](slides_PAKDD2025.pdf).
+Slides can be found here: [`PAKDD25_Tutorial.pdf`](PAKDD25_Tutorial.pdf).
 
 ### Additional Resources
 
